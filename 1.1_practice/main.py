@@ -49,7 +49,7 @@ def train_with_eval():
     total_train_steps = math.ceil(config["train_size"] * total_train_epochs / config["batch_size"])
     total_eval_steps = math.ceil(config["eval_size"] * total_eval_epochs / config["batch_size"])
     eval_per_n_steps = math.ceil(config["train_size"] * eval_per_n_epochs / config["batch_size"])
-    save_per_n_steps = math.ceil(config["train_size"] * eval_per_n_epochs / config["batch_size"])
+    save_per_n_steps = math.ceil(config["train_size"] * save_per_n_epochs / config["batch_size"])
     steps_one_epoch = math.ceil(config["train_size"] / config["batch_size"])
 
     # 训练

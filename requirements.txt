@@ -5,3 +5,6 @@ torch==1.7.1
 transformers==4.2.2
 textbrewer==0.2.1.post1
 neo4j-driver==4.3.4
+tensorboardX==2.4
+numpy~=1.21.1
+tqdm~=4.62.0

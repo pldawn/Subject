@@ -33,8 +33,8 @@ class Summarizer:
         content_tokens = content_tokens[:self.configure["max_length"] - self.configure["max_summary_length"] - 3]
 
         # 获取content_id、title_id、unk_id、sep_id值
-        content_id = self.tokenizer.convert_tokens_to_ids("[Content]")
-        title_id = self.tokenizer.convert_tokens_to_ids("[Title]")
+        content_id = self.tokenizer.convert_tokens_to_ids("[unused2]")
+        title_id = self.tokenizer.convert_tokens_to_ids("[unused3]")
         unk_id = self.tokenizer.convert_tokens_to_ids("[UNK]")
         sep_id = self.tokenizer.convert_tokens_to_ids("[SEP]")
 
@@ -125,7 +125,7 @@ class Summarizer:
 
             # 将token_id序列变成汉字序列，去除"##"，并将[Space]替换成空格
             decoded = self.tokenizer.convert_ids_to_tokens(responses)
-            candidate_responses.append("".join(decoded).replace("##", "").replace("[space]", " "))
+            candidate_responses.append("".join(decoded).replace("##", "").replace("[unused1]", " "))
 
         return candidate_responses
 
@@ -164,16 +164,3 @@ class Summarizer:
                 logit[indices_to_remove] = -float("Inf")
 
         return logits
-
-
-if __name__ == '__main__':
-    summary_model_path = ""
-    summary_tokenizer_path = ""
-
-    agent = Summarizer(summary_model_path, summary_tokenizer_path)
-    content = "澳门2014年现金分享计划将于7月2日正式实施。届时，澳门特区永久性居民及非永久性居民将分别获发9000和5400澳门元。澳门特区政府此项财政开支约为56.59亿。为市民共享经济发展成果，澳门08年起推出现金分享计划。"  # input("输入的新闻正文为:")
-    print(f"原文: {content}")
-
-    summaries = agent.generate_summary(content, greedy=False)
-    for i, title in enumerate(summaries):
-        print("生成的第{}个标题为：{}".format(i + 1, title))

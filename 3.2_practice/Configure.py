@@ -7,14 +7,19 @@ class Configure:
 
     def generate_default_configure(self) -> dict:
         default_configure = {
-            "device": "cuda:0",
-            "top_k": 10,
-            "top_p": 0.90,
-            "repetition_penalty": 1.2,
-            "repetition_window": 4,
-            "max_length": 512,
-            "max_summary_length": 30,
-            "summary_nums": 10
+            "num_train_epochs": 5,
+            "train_batch_size": 16,
+            "test_batch_size": 4,
+            "learning_rate": 1e-4,
+            "warmup_proportion": 0.1,
+            "adam_epsilon": 1e-8,
+            "logging_steps": 20,
+            "eval_steps": 3751075,
+            "gradient_accumulation_steps": 4,
+            "max_grad_norm": 1.0,
+            "max_len": 512,
+            "title_max_len": 50,
+            "save_steps": 100000,
         }
 
         return default_configure
